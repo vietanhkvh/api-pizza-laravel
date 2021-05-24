@@ -16,6 +16,7 @@ class CreateDatabase extends Migration
     {
         $date = new DateTime();
         $unixTimestamp = $date->getTimestamp();
+        
         //Users
         Schema::create('users', function (Blueprint $table) {
             $table->id();
