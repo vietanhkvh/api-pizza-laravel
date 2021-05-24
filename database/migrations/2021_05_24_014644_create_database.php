@@ -68,6 +68,20 @@ class CreateDatabase extends Migration
 
         ]);
 
+        //Types
+        Schema::create('types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 50);
+        });
+        DB::table('types')->insert([
+            [
+                'name' => 'pizza',
+            ],
+            [
+                'name' => 'cake',
+            ],
+        ]); 
+        
         //Products
         Schema::create('products', function (Blueprint $table) {
             $table->id();
@@ -94,20 +108,6 @@ class CreateDatabase extends Migration
             ],
         ]);
         
-        //Types
-        Schema::create('types', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 50);
-        });
-        DB::table('types')->insert([
-            [
-                'name' => 'pizza',
-            ],
-            [
-                'name' => 'cake',
-            ],
-        ]); 
-
         
         //Bills
         Schema::create('bills', function (Blueprint $table) {
