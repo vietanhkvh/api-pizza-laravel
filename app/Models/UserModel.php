@@ -12,7 +12,7 @@ class UserModel extends Model
     protected $fillable = [
         'username',
         'password',
-        'fullName',
+        'name',
         'email',
         'address',
         'phone',
