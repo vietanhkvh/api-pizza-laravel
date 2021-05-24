@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\pizzaAPI;
+
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,14 +21,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // User
-// Route::get('user', 'App\Http\Controllers\UserController@getAllUser');
-// Route::get('user/{id}', 'App\Http\Controllers\UserController@getUserById');
-// Route::post('user', 'App\Http\Controllers\UserController@createUser');
-// Route::put('user/{id}', 'App\Http\Controllers\UserController@updateUser');
-// Route::delete('user/{id}', 'App\Http\Controllers\UserController@deleteUser');
+Route::get('user', [UserController::class, 'index']);
 
-//User
-Route::apiResource('user', 'App\Http\Controllers\Api\UserController');
+Route::get('user/{id}', [UserController::class, 'show']);
+
+Route::post('user', [UserController::class, 'store']);
+
+Route::put('user/{id}', [UserController::class, 'update']);
+
+Route::delete('user/{id}', [UserController::class, 'destroy']);
+
+// //User
+// Route::apiResource('user', 'App\Http\Controllers\Api\UserController');
 
 
 //Type

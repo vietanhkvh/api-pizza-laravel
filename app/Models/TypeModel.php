@@ -12,4 +12,8 @@ class TypeModel extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function product() {
+        return $this->hasMany('App\Models\ProductModel', 'type_id', 'id');
+    }
 }

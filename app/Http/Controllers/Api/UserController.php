@@ -16,9 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $userList = UserModel::paginate(1);
-        // return response()->json( $userList, 200);
-        return response()->json(UserModel::get(), 200);
+        $user = UserModel::all();
+        return response()->json(['status' => 1, 'data' => UserResource::collection($user)]);
     }
 
     /**
@@ -39,7 +38,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-         $rules = [
+        $rules = [
             'username' => 'required|min:1',
             'password' => 'required|min:1',
             'phone' => 'required|max:11',   
@@ -50,7 +49,7 @@ class UserController extends Controller
             return response()->json($validator->errors(), 400);
         }
         $user = UserModel::create($request->all());
-        return response()->json($user, 201);
+        return response()->json(['status' => 1, 'data' => $user], 201);
     }
 
     /**
@@ -61,11 +60,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = UserModel::find($id);
+        $user = UserModel::where(['id' => $id])->get();
         if(is_null($user)){
             return response()->json(["message"=>"Record not found!"], 404);
         }
-        return response()->json($user, 200);
+        return response()->json(['status' => 1, 'data' => UserResource::collection($user)], 201);
     }
 
     /**
@@ -88,13 +87,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = UserModel::find($id);
-        if(is_null($user)){
-            return response()->json(["message"=>"Record not found!"], 404);
-            $user->update($request->all());
-        }
+        $user = UserModel::where(['id' => $id])->first();
+        $user->update($request->all());
         
-        return response()->json($user, 200);
+        return response()->json(['status' => 1, 'data' => $user], 200);
     }
 
     /**
@@ -105,12 +101,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = UserModel::find($id);
+        $user = UserModel::where('id', $id)->first();
         if(is_null($user)){
             return response()->json(["message"=>"Record not found!"], 404);
         }else{
             $user->delete();
         }
-        return response()->json(null, 204);
+        return response()->json(['status' => 1, 'data' => null], 404);
     }
 }
