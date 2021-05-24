@@ -2,10 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\Api\LoginController;
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\pizzaAPI;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -35,4 +32,4 @@ Route::get('file/image', 'App\Http\Controllers\Api\FileController@downloadImage'
 Route::post('file/image', 'App\Http\Controllers\Api\FileController@updateImage');
 
 // Login
-Route::post('login', [AuthController::class, 'login']);
+Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
