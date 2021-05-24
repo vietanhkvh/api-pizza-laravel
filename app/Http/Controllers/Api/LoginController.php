@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Config;
 class LoginController extends Controller
 {
     public function login(Request $request) {
-        $user = User::where(['username' => $request->get('username')])->first();
+        $user = UserModel::where(['username' => $request->get('username')])->first();
         
         if($user == null)
             return response()->json(['status' => Config::get('siteMsg.fails_code'), 'message' => 'Tài khoản chưa được đăng ký!']);
