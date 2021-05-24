@@ -25,7 +25,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::put('user/{id}', 'App\Http\Controllers\UserController@updateUser');
 // Route::delete('user/{id}', 'App\Http\Controllers\UserController@deleteUser');
 
+//User
 Route::apiResource('user', 'App\Http\Controllers\Api\UserController');
+
+
+//Type
+Route::apiResource('type', 'App\Http\Controllers\Api\TypeController');
+
 //download image
 Route::get('file/image', 'App\Http\Controllers\Api\FileController@downloadImage');
 //update image
