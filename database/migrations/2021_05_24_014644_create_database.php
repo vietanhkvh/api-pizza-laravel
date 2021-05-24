@@ -160,7 +160,9 @@ class CreateDatabase extends Migration
     {
         Schema::dropIfExists('users');
         Schema::dropIfExists('products');
+        Schema::dropIfExists('types');
         Schema::dropIfExists('bills');
         Schema::dropIfExists('detail_bill');
+        
     }
 }
