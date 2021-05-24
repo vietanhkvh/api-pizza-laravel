@@ -83,13 +83,13 @@ class CreateDatabase extends Migration
             [
                 'name' => 'Pizza 1',
                 'price' => 99000,
-                'type_id' => '1',
+                'type_id' => 1,
                 'image' => 'pizza1.png',
             ],
             [
                 'name' => 'Cake 1',                
                 'price' => 50000,
-                'type_id' => '2',
+                'type_id' => 2,
                 'image' => 'cake1.png',
             ],
         ]);
