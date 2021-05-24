@@ -10,12 +10,9 @@ class ProductModel extends Model
     protected $table = "products";
     public $timestamps = false;
     protected $fillable = [
-        'username',
-        'password',
         'name',
-        'email',
-        'address',
-        'phone',
-        'role',
+        'price',
+        'type_id',
+        'image',
     ];
 }

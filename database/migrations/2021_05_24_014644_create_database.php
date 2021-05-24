@@ -72,25 +72,43 @@ class CreateDatabase extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
-            $table->string('type', 10);
             $table->bigInteger('price');
+            $table->integer('type_id');
             $table->string('image', 100);
+        });
+        Schema::table('products', function (Blueprint $table) {
+            $table->foreign('type_id')->references('id')->on('types');
         });
         DB::table('products')->insert([
             [
                 'name' => 'Pizza 1',
-                'type' => 'pizza',
                 'price' => 99000,
+                'type_id' => '1',
                 'image' => 'pizza1.png',
             ],
             [
-                'name' => 'Cake 1',
-                'type' => 'cake',
+                'name' => 'Cake 1',                
                 'price' => 50000,
+                'type_id' => '2',
                 'image' => 'cake1.png',
             ],
         ]);
+        
+        //Types
+        Schema::create('types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 50);
+        });
+        DB::table('types')->insert([
+            [
+                'name' => 'pizza',
+            ],
+            [
+                'name' => 'cake',
+            ],
+        ]); 
 
+        
         //Bills
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
