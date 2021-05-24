@@ -73,7 +73,7 @@ class CreateDatabase extends Migration
             $table->id();
             $table->string('name', 50);
             $table->bigInteger('price');
-            $table->bigInteger('type_id');
+            $table->bigInteger('type_id')->unsigned();
             $table->string('image', 100);
         });
         Schema::table('products', function (Blueprint $table) {
