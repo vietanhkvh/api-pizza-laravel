@@ -13,13 +13,13 @@ class LoginController extends Controller
         $user = UserModel::where(['username' => $request->get('username')])->first();
         
         if($user == null)
-            return response()->json(['status' => Config::get('siteMsg.fails_code'), 'message' => 'Tài khoản chưa được đăng ký!']);
+            return response()->json(['status' => 1, 'message' => 'Tài khoản chưa được đăng ký!']);
 
         else {
             if($user->password != $request->get('password'))
-                return response()->json(['status' => Config::get('siteMsg.invalid_code'), 'message' => 'Sai mật khẩu!']);
+                return response()->json(['status' => 2, 'message' => 'Sai mật khẩu!']);
             else
-                return response()->json(['status' => Config::get('siteMsg.success_code'), 'data' => $user]);
+                return response()->json(['status' => 0, 'data' => $user]);
         }
     }
 }
