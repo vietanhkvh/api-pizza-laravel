@@ -125,6 +125,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = ProductModel::where(['id' => $id])->first();
+        $product->delete();
+
+        return response()->json(['status' => 1, 'data' => null], 404);
     }
 }
