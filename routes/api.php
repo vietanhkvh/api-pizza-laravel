@@ -51,4 +51,4 @@ Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
 
 /*---All Product---*/
 Route::get('product', [ProductController::class, 'index']);
-Route::get('product/{typeid}', [ProductController::class, 'getProductByTypeId']);
+Route::get('product/type/{typeid}', [ProductController::class, 'getProductByTypeId']);
