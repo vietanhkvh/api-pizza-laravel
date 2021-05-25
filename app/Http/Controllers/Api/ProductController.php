@@ -21,8 +21,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product ->ProductModel::where();
+        $product = ProductModel::all();
         return response()->json(['status' => 1, 'data' => ProductResource::collection($product)]);
+
     }
 
     /**
