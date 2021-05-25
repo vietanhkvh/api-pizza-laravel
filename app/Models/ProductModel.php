@@ -15,4 +15,8 @@ class ProductModel extends Model
         'type_id',
         'image',
     ];
+
+    public function type() {
+        return $this->belongsTo('App\Models\TypeModel', 'type_id', 'id');
+    }
 }
