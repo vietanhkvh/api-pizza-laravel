@@ -89,8 +89,11 @@ class ProductController extends Controller
      */
     public function show($id)
     {
+        
         $product = ProductModel::where(['id' => $id])->get();
-
+        if(is_null($product)){
+            return response()->json(["message"=>"Record not found!"], 404);
+        }
         return response()->json(['status' => 1, 'data' => ProductResource::collection($product)], 201);
     }
 
@@ -114,7 +117,35 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = ProductModel::where(['id' => $id]);
+        if(is_null($product)){
+            return response()->json(["message"=>"Record not found!"], 404);
+        }
+        $product->update($request->all());
+
+        $file = $request->file('image');
+        $resource = fopen($file, "r") or die("File upload Problems");
+
+        // Upload hinh anh len Imgur bang API
+        $imgur_client = new Client(['base_uri' => 'https://api.imgur.com/3/upload']);
+        $imgur_response = $imgur_client->post('image', [
+            'headers' => [
+                'Authorization' => 'Client-ID 46dded22984842f',
+
+            ],
+            'multipart' => [
+                [
+                    'Content-Type' => 'multipart/form-data; boundary=<calculated when request is sent>',
+                    'name' => 'image',
+                    'contents' => $resource,
+                ]
+            ]
+        ]);
+
+        $img_link = json_decode($imgur_response->getBody())->data->link;
+        ProductModel::where(['id' => $id])->update(['image' => $img_link]);
+
+        return response()->json(['status' => 1, 'data' => ProductResource::collection(ProductModel::all())], 200);
     }
 
     /**
@@ -126,6 +157,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = ProductModel::where(['id' => $id])->first();
+        if(is_null($product)){
+            return response()->json(["message"=>"Record not found!"], 404);
+        }else{
+             $product->delete();
+        }
         $product->delete();
 
         return response()->json(['status' => 1, 'data' => null], 404);
