@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Models\ProductModel;
+use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,7 @@ class ProductController extends Controller
     public function index()
     {
         $product ->ProductModel::where();
-        return response()->json(['status' => 1, 'data' => PostResource::collection($product)]);
+        return response()->json(['status' => 1, 'data' => ProductResource::collection($product)]);
     }
 
     /**
