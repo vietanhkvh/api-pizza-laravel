@@ -59,7 +59,7 @@ class ProductController extends Controller
         //Upload image by API
         //0e0dc4ad07642fa5354c6fe779bc975ae7f08875
         //46dded22984842f
-        $imgur_client = new Client(['base_uri' => 'https://api.imgur.com/3/upload')]);
+        $imgur_client = new Client(['base_uri' => 'https://api.imgur.com/3/upload']);
         $imgur_response = $imgur_client->post('image', [
             'headers' => [
                 'Authorization' => 'Client-ID 46dded22984842f',
