@@ -63,7 +63,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = ProductModel::where(['id' => $id])->get();
+
+        return response()->json(['status' => 1, 'data' => ProductModel::collection($product)], 201);
     }
 
     /**
