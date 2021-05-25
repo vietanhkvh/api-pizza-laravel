@@ -30,9 +30,9 @@ class ProductController extends Controller
 
     public function getProductByTypeId($typeid)
     {
-        $product = ProductModel::where(['type_id' => $typeid])->get()->sortDesc();
+        $product = ProductModel::where(['type_id' => $typeid])->get();
 
-        return response()->json(['status' => 1, 'data' => ProductModel::collection($product)]);
+        return response()->json(['status' => 1, 'data' => ProductResource::collection($product)]);
     }
     /**
      * Show the form for creating a new resource.
@@ -65,7 +65,7 @@ class ProductController extends Controller
     {
         $product = ProductModel::where(['id' => $id])->get();
 
-        return response()->json(['status' => 1, 'data' => ProductModel::collection($product)], 201);
+        return response()->json(['status' => 1, 'data' => ProductResource::collection($product)], 201);
     }
 
     /**
