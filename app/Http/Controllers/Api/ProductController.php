@@ -78,7 +78,7 @@ class ProductController extends Controller
         //$link_img = $request->get('image');
         ProductModel::where(['id' => $product->id])->update(['image' => $img_link]);
 
-        return response()->json(['status' => 1, 'data' => ProductResource::collection(Post::all())], 201);
+        return response()->json(['status' => 1, 'data' => ProductResource::collection(ProductModel::all())], 201);
     }
 
     /**
