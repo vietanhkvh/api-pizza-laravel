@@ -20,8 +20,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // $pizza ->ProductModel::where();
-        // return response()->json(['status' => 1, 'data' => PostResource::collection($product)]);
+        $product ->ProductModel::where();
+        return response()->json(['status' => 1, 'data' => PostResource::collection($product)]);
     }
 
     /**
