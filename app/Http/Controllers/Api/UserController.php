@@ -89,9 +89,12 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = UserModel::where(['id' => $id])->first();
+         if(is_null($user)){
+            return response()->json(["message"=>"Record not found!"], 404);
+        }
         $user->update($request->all());
         
-        return response()->json(['status' => 1, 'data' => $user], 200);
+        return response()->json(['status' => 1, 'data' => UserResource::collection($user)], 200);
     }
 
     /**
