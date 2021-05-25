@@ -47,5 +47,8 @@ Route::post('file/image', 'App\Http\Controllers\Api\FileController@updateImage')
 // Login
 Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
 
-//All Product
+
+
+/*---All Product---*/
 Route::get('product', [ProductController::class, 'index']);
+Route::get('product/{typeid}', [ProductController::class, 'getProductByTypeId']);

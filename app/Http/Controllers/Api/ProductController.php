@@ -19,6 +19,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //Get All Product
     public function index()
     {
         $product = ProductModel::all();
@@ -26,6 +27,13 @@ class ProductController extends Controller
 
     }
 
+
+    public function getProductByTypeId($typeid)
+    {
+        $product = ProductModel::where(['type_id' => $typeid])->get()->sortDesc();
+
+        return response()->json(['status' => 1, 'data' => ProductModel::collection($product)]);
+    }
     /**
      * Show the form for creating a new resource.
      *
