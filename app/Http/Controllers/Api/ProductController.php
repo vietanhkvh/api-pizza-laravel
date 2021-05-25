@@ -52,7 +52,33 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = ProductModel::create($request->all());
+        $file = $request->file('image');
+        $resource = fopen($file, "r") or die("File upload Problems");
+
+        //Upload image by API
+        //0e0dc4ad07642fa5354c6fe779bc975ae7f08875
+        //46dded22984842f
+        $imgur_client = new Client(['base_uri' => 'https://api.imgur.com/3/upload')]);
+        $imgur_response = $imgur_client->post('image', [
+            'headers' => [
+                'Authorization' => 'Client-ID 46dded22984842f',
+
+            ],
+            'multipart' => [
+                [
+                    'Content-Type' => 'multipart/form-data; boundary=<calculated when request is sent>',
+                    'name' => 'image',
+                    'contents' => $resource,
+                ]
+            ]
+        ]);
+        $img_link = json_decode($imgur_response->getBody())->data->link;
+
+        //$link_img = $request->get('image');
+        ProductModel::where(['id' => $product->id])->update(['image' => $img_link]);
+
+        return response()->json(['status' => 1, 'data' => ProductResource::collection(Post::all())], 201);
     }
 
     /**
