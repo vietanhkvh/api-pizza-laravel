@@ -22,13 +22,13 @@ class BillController extends Controller
      */
     public function index()
     {
-        $bill = BillModel::all();
+        $bill = BillModel::all()->sortDesc();
         return response()->json(['status' => 1, 'data' => BillResource::collection($bill)]);
     }
 
     public function getBillByUserId($userid)
     {
-        $bill = BillModel::where(['user_id' => $userid])->get();
+        $bill = BillModel::where(['user_id' => $userid])->get()->sortDesc();
 
         return response()->json(['status' => 1, 'data' => BillResource::collection($bill)]);
     }

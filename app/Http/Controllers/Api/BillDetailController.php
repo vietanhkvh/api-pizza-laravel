@@ -28,7 +28,7 @@ class BillDetailController extends Controller
 
     public function getDetailBillByBillId($billid)
     {
-        $bill_detail = BillDetailModel::where(['bill_id' => $billid])->get();
+        $bill_detail = BillDetailModel::where(['bill_id' => $billid])->get()->sortDesc();
 
         return response()->json(['status' => 1, 'data' => BillDetailResource::collection($bill_detail)]);
     }
