@@ -116,11 +116,4 @@ class BillController extends Controller
 
         return response()->json(['status' => 1, 'data' => null], 404);
     }
-    
-    public function deleteBillByUserId($userid)
-    {
-        $bill = BillModel::where(['user_id' => $userid])->get();
-          $bill->delete();
-       return response()->json(['status' => 1, 'data' => null], 404);
-    }
 }

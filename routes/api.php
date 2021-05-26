@@ -60,7 +60,6 @@ Route::get('bill/{id}', [BillController::class, 'show']);
 Route::post('bill', [BillController::class, 'store']);
 Route::put('bill/{id}', [BillController::class, 'update']);
 Route::delete('bill/{id}', [BillController::class, 'destroy']);
-Route::delete('bill/user/{userid}', [BillController::class, 'deleteBillByUserId']);
 
 /*---Bill-Detail---*/
 // Route::get('product', [BillDetailController::class, 'index']);
