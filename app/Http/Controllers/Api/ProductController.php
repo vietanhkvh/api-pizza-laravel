@@ -74,8 +74,7 @@ class ProductController extends Controller
             ]
         ]);
         $img_link = json_decode($imgur_response->getBody())->data->link;
-
-        //$link_img = $request->get('image');
+                    
         ProductModel::where(['id' => $product->id])->update(['image' => $img_link]);
 
         return response()->json(['status' => 1, 'data' => ProductResource::collection(ProductModel::all())], 201);
@@ -137,8 +136,6 @@ class ProductController extends Controller
         $product = ProductModel::where(['id' => $id])->first();
         if(is_null($product)){
             return response()->json(["message"=>"Record not found!"], 404);
-        }else{
-             $product->delete();
         }
         $product->delete();
 

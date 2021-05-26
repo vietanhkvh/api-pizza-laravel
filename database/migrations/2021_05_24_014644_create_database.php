@@ -120,14 +120,7 @@ class CreateDatabase extends Migration
         Schema::table('bills', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
         });
-        // DB::table('bills')->insert([
-        //     [
-        //         'prices' => 99000,
-        //         'note' => 'delivering',
-        //         'date' => '25/05/2021',
-        //         'user_id' => 1,
-        //     ],
-        // ]);
+        
 
         //DetailBill
         Schema::create('detail_bill', function (Blueprint $table) {
