@@ -22,7 +22,7 @@ class ProductController extends Controller
     //Get All Product
     public function index()
     {
-        $product = ProductModel::all();
+        $product = ProductModel::all()->sortDesc();
         return response()->json(['status' => 1, 'data' => ProductResource::collection($product)]);
 
     }
