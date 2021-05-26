@@ -94,7 +94,7 @@ class UserController extends Controller
         }
         $user->update($request->all());
         
-        return response()->json(['status' => 1, 'data' => UserResource::collection($user)], 200);
+        return response()->json(['status' => 1, 'data' => $user], 200);
     }
 
     /**

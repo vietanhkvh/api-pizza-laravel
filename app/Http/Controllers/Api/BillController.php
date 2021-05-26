@@ -52,7 +52,7 @@ class BillController extends Controller
     public function store(Request $request)
     {
         $bill = BillModel::create($request->all());
-        return response()->json(['status' => 1, 'data' => BillResource::collection(BillModel::all())], 201);
+        return response()->json(['status' => 1, 'data' =>  'data' => $bill], 201);
     }
 
     /**
@@ -67,7 +67,7 @@ class BillController extends Controller
         if(is_null($bill)){
             return response()->json(["message"=>"Record not found!"], 404);
         }
-        return response()->json(['status' => 1, 'data' => BillResource::collection($bill)], 201);
+        return response()->json(['status' => 1, 'data' =>  'data' => $bill], 201);
     }
 
     /**
@@ -96,7 +96,7 @@ class BillController extends Controller
         }
         $bill->update($request->all());
 
-        return response()->json(['status' => 1, 'data' => BillResource::collection(BillModel::all())], 200);
+        return response()->json(['status' => 1,  'data' => $bill], 200);
     }
 
     /**
