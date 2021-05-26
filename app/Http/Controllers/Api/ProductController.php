@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     public function getProductByTypeId($typeid)
     {
-        $product = ProductModel::where(['type_id' => $typeid])->get();
+        $product = ProductModel::where(['type_id' => $typeid])->get()->sortDesc();
 
         return response()->json(['status' => 1, 'data' => ProductResource::collection($product)]);
     }
