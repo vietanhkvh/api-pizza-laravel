@@ -92,7 +92,7 @@ class BillDetailController extends Controller
         }
         $bill_detail->update($request->all());
 
-        return response()->json(['status' => 1, 'data' => BillDetailResource::collection(BillDetailModel::where(['id' => $bill->id])->get())], 200);
+        return response()->json(['status' => 1, 'data' => BillDetailResource::collection($bill_detail)], 200);
     }
 
     /**
