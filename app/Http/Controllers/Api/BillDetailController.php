@@ -52,7 +52,7 @@ class BillDetailController extends Controller
     {
         $bill_detail = BillDetailModel::create($request->all());
 
-        return response()->json(['status' => 1, 'data' => BillDetailResource::collection(BillDetailModel::where(['id' => $bill->id])->get())], 201);
+        return response()->json(['status' => 1, 'data' => BillDetailResource::collection(BillDetailModel::where(['id' => $bill_detail->id])->get())], 201);
     }
 
     /**
