@@ -74,10 +74,10 @@ class ProductController extends Controller
             ]
         ]);
         $img_link = json_decode($imgur_response->getBody())->data->link;
-                    
+
         ProductModel::where(['id' => $product->id])->update(['image' => $img_link]);
 
-        return response()->json(['status' => 1, 'data' => $product], 201);
+        return response()->json(['status' => 1, 'data' => ProductResource::collection(ProductModel::all())], 201);
     }
 
     /**
@@ -122,7 +122,7 @@ class ProductController extends Controller
         }
         $product->update($request->all());
 
-        return response()->json(['status' => 1, 'data' => $product], 200);
+        return response()->json(['status' => 1, 'data' => ProductResource::collection(ProductModel::all())], 200);
     }
 
     /**

@@ -65,7 +65,7 @@ class UserController extends Controller
         if(is_null($user)){
             return response()->json(["message"=>"Record not found!"], 404);
         }
-        return response()->json(['status' => 1, 'data' => UserResource::collection($user)], 201);
+        return response()->json(['status' => 1, 'data' => $user], 201);
     }
 
     /**
