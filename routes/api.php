@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\BillController;
+use App\Http\Controllers\Api\BillDetailController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -60,7 +63,7 @@ Route::delete('bill/{id}', [BillController::class, 'destroy']);
 
 /*---Bill-Detail---*/
 // Route::get('product', [BillDetailController::class, 'index']);
-Route::get('detail_bill/bill/{billid}', [BillDetailController::class, 'getProductByTypeId']);
+Route::get('detail_bill/bill/{billid}', [BillDetailController::class, 'getDetailBillByBillId']);
 Route::post('detail_bill', [BillDetailController::class, 'store']);
 Route::put('detail_bill/{id}', [BillDetailController::class, 'update']);
 Route::delete('detail_bill/{id}', [BillDetailController::class, 'destroy']);
