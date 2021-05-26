@@ -50,7 +50,7 @@ class UserController extends Controller
             return response()->json($validator->errors(), 400);
         }
         $user = UserModel::create($request->all());
-        return response()->json(['status' => 1, 'data' => UserResource::collection(User::where(['id' => $user->id])->get())], 201);
+        return response()->json(['status' => 1, 'data' => UserResource::collection(UserModel::where(['id' => $user->id])->get())], 201);
     }
 
     /**
