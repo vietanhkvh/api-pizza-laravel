@@ -109,7 +109,7 @@ class CreateDatabase extends Migration
             $table->id();
             $table->bigInteger('prices');
             $table->string('note', 20);
-            $table->date('date');
+            $table->string('date');
             $table->bigInteger('user_id')->unsigned();
         });
         Schema::table('bills', function (Blueprint $table) {
