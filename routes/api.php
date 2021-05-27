@@ -26,9 +26,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::apiResource('user', 'App\Http\Controllers\Api\UserController');
 
 //download image
-Route::get('file/image', 'App\Http\Controllers\Api\FileController@downloadImage');
+// Route::get('file/image', 'App\Http\Controllers\Api\FileController@downloadImage');
 //update image
-Route::post('file/image', 'App\Http\Controllers\Api\FileController@updateImage');
+// Route::post('file/image', 'App\Http\Controllers\Api\FileController@updateImage');
 
 // Login
 Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
@@ -49,6 +49,7 @@ Route::apiResource('type', 'App\Http\Controllers\Api\TypeController');
 /*---Bill---*/
 Route::get('bill', [BillController::class, 'index']);
 Route::get('bill/user/{userid}', [BillController::class, 'getBillByUserId']);
+Route::get('bill/note/{note}', [BillController::class, 'getBillByNote']);
 Route::get('bill/{id}', [BillController::class, 'show']);
 Route::post('bill', [BillController::class, 'store']);
 Route::put('bill/{id}', [BillController::class, 'update']);
