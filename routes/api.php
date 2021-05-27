@@ -49,6 +49,7 @@ Route::apiResource('type', 'App\Http\Controllers\Api\TypeController');
 /*---Bill---*/
 Route::get('bill', [BillController::class, 'index']);
 Route::get('bill/user/{userid}', [BillController::class, 'getBillByUserId']);
+Route::get('bill/note/{note}', [BillController::class, 'getBillByNote']);
 Route::get('bill/{id}', [BillController::class, 'show']);
 Route::post('bill', [BillController::class, 'store']);
 Route::put('bill/{id}', [BillController::class, 'update']);
