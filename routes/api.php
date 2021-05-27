@@ -25,10 +25,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // //User
 // Route::apiResource('user', 'App\Http\Controllers\Api\UserController');
 
-//download image
-Route::get('file/image', 'App\Http\Controllers\Api\FileController@downloadImage');
-//update image
-Route::post('file/image', 'App\Http\Controllers\Api\FileController@updateImage');
+// //download image
+// Route::get('file/image', 'App\Http\Controllers\Api\FileController@downloadImage');
+// //update image
+// Route::post('file/image', 'App\Http\Controllers\Api\FileController@updateImage');
 
 // Login
 Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
