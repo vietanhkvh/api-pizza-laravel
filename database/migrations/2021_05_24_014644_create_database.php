@@ -64,6 +64,15 @@ class CreateDatabase extends Migration
                 'address' => '123abc',
                 'phone' => '0123456789',
                 'role' => 'admin',
+            ],
+            [
+                'username' => 'test',
+                'password' => '123',
+                'name' => 'TEST',
+                'email' => 'test@pizza.com',
+                'address' => 'test123',
+                'phone' => '0123456789',
+                'role' => 'customer',
             ],    
 
         ]);
@@ -93,20 +102,6 @@ class CreateDatabase extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->foreign('type_id')->references('id')->on('types');
         });
-        DB::table('products')->insert([
-            [
-                'name' => 'Pizza 1',
-                'price' => 99000,
-                'type_id' => 1,
-                'image' => 'pizza1.png',
-            ],
-            [
-                'name' => 'Cake 1',                
-                'price' => 50000,
-                'type_id' => 2,
-                'image' => 'cake1.png',
-            ],
-        ]);
         
         
         //Bills
@@ -114,20 +109,13 @@ class CreateDatabase extends Migration
             $table->id();
             $table->bigInteger('prices');
             $table->string('note', 20);
-            $table->date('date');
+            $table->string('date');
             $table->bigInteger('user_id')->unsigned();
         });
         Schema::table('bills', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
         });
-        // DB::table('bills')->insert([
-        //     [
-        //         'prices' => 99000,
-        //         'note' => 'delivering',
-        //         'date' => '25/05/2021',
-        //         'user_id' => 1,
-        //     ],
-        // ]);
+        
 
         //DetailBill
         Schema::create('detail_bill', function (Blueprint $table) {
@@ -141,14 +129,6 @@ class CreateDatabase extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('bill_id')->references('id')->on('bills');
         });
-        // DB::table('detail_bill')->insert([
-        //     [
-        //         'prices' => 99000,
-        //         'count' => 1,
-        //         'product_id' => 1,
-        //         'bill_id' => 1,
-        //     ],
-        // ]);
     }
 
     /**

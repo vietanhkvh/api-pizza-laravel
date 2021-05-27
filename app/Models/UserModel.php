@@ -22,4 +22,7 @@ class UserModel extends Model
         'phone',
         'role',
     ];
+    public function bill() {
+        return $this->hasMany('App\Models\BillModel', 'user_id', 'id');
+    }
 }

@@ -19,4 +19,7 @@ class ProductModel extends Model
     public function type() {
         return $this->belongsTo('App\Models\TypeModel', 'type_id', 'id');
     }
+    public function billDetail() {
+        return $this->hasMany('App\Models\BillDetailModel', 'product_id', 'id');
+    }
 }

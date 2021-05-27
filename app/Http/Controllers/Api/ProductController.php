@@ -22,7 +22,7 @@ class ProductController extends Controller
     //Get All Product
     public function index()
     {
-        $product = ProductModel::all();
+        $product = ProductModel::all()->sortDesc();
         return response()->json(['status' => 1, 'data' => ProductResource::collection($product)]);
 
     }
@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     public function getProductByTypeId($typeid)
     {
-        $product = ProductModel::where(['type_id' => $typeid])->get();
+        $product = ProductModel::where(['type_id' => $typeid])->get()->sortDesc();
 
         return response()->json(['status' => 1, 'data' => ProductResource::collection($product)]);
     }
@@ -75,10 +75,9 @@ class ProductController extends Controller
         ]);
         $img_link = json_decode($imgur_response->getBody())->data->link;
 
-        //$link_img = $request->get('image');
         ProductModel::where(['id' => $product->id])->update(['image' => $img_link]);
 
-        return response()->json(['status' => 1, 'data' => ProductResource::collection(ProductModel::all())], 201);
+        return response()->json(['status' => 1, 'data' => ProductResource::collection(ProductModel::where(['id' => $product->id])->get())], 201);
     }
 
     /**
@@ -123,7 +122,7 @@ class ProductController extends Controller
         }
         $product->update($request->all());
 
-        return response()->json(['status' => 1, 'data' => ProductResource::collection(ProductModel::all())], 200);
+        return response()->json(['status' => 1, 'data' => ProductResource::collection(ProductModel::where(['id' => $product->id])->get())], 200);
     }
 
     /**
@@ -137,8 +136,6 @@ class ProductController extends Controller
         $product = ProductModel::where(['id' => $id])->first();
         if(is_null($product)){
             return response()->json(["message"=>"Record not found!"], 404);
-        }else{
-             $product->delete();
         }
         $product->delete();
 

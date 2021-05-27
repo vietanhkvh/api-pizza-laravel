@@ -4,11 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Resources\UserResource;
-use App\Models\UserModel;
-use Validator;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
-class UserController extends Controller
+use App\Models\BillDetailModel;
+use App\Http\Resources\BillDetailResource;
+
+class BillDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +22,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = UserModel::all()->sortDesc();
-        return response()->json(['status' => 1, 'data' => UserResource::collection($user)]);
+        // $bill_detail = BillDetailModel::all();
+        // return response()->json(['status' => 1, 'data' => BillDetailResource::collection($bill_detail)]);
     }
 
+    public function getDetailBillByBillId($billid)
+    {
+        $bill_detail = BillDetailModel::where(['bill_id' => $billid])->get()->sortDesc();
+
+        return response()->json(['status' => 1, 'data' => BillDetailResource::collection($bill_detail)]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -39,18 +50,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'username' => 'required|min:1',
-            'password' => 'required|min:1',
-            'phone' => 'required|max:11',   
-            
-        ];
-        $validator = Validator::make($request->all(), $rules);
-        if($validator->fails()){
-            return response()->json($validator->errors(), 400);
-        }
-        $user = UserModel::create($request->all());
-        return response()->json(['status' => 1, 'data' => UserResource::collection(UserModel::where(['id' => $user->id])->get())], 201);
+        $bill_detail = BillDetailModel::create($request->all());
+
+        return response()->json(['status' => 1, 'data' => BillDetailResource::collection(BillDetailModel::where(['id' => $bill_detail->id])->get())], 201);
     }
 
     /**
@@ -61,11 +63,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = UserModel::where(['id' => $id])->get();
-        if(is_null($user)){
-            return response()->json(["message"=>"Record not found!"], 404);
-        }
-        return response()->json(['status' => 1, 'data' => $user], 201);
+        
     }
 
     /**
@@ -76,7 +74,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        
+        //
     }
 
     /**
@@ -88,13 +86,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = UserModel::where(['id' => $id])->first();
-         if(is_null($user)){
+        $bill_detail = BillDetailModel::where(['id' => $id]);
+        if(is_null($bill_detail)){
             return response()->json(["message"=>"Record not found!"], 404);
         }
-        $user->update($request->all());
-        
-        return response()->json(['status' => 1, 'data' => $user], 200);
+        $bill_detail->update($request->all());
+
+        return response()->json(['status' => 1, 'data' => BillDetailResource::collection(BillDetailModel::where(['id' => $id])->get())], 200);
     }
 
     /**
@@ -105,12 +103,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = UserModel::where('id', $id)->first();
-        if(is_null($user)){
+        $bill_detail = BillDetailModel::where(['id' => $id])->first();
+        if(is_null($bill_detail)){
             return response()->json(["message"=>"Record not found!"], 404);
-        }else{
-            $user->delete();
         }
+        $bill_detail->delete();
+
         return response()->json(['status' => 1, 'data' => null], 404);
     }
 }
