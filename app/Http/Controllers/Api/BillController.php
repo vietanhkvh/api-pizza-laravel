@@ -35,11 +35,11 @@ class BillController extends Controller
 
     public function getBillByNote($note)
     {
-        $bill = BillModel::where(['user_id' => $note])->get()->sortDesc();
+        $bill = BillModel::where(['note' => $note])->get()->sortDesc();
 
         return response()->json(['status' => 1, 'data' => BillResource::collection($bill)]);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
