@@ -9,6 +9,10 @@ class UserModel extends Model
 {
     protected $table = "users";
     public $timestamps = false;
+    protected $hidden=[
+        'password',
+        'remember_token'
+    ];
     protected $fillable = [
         'username',
         'password',

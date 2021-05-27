@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,7 +47,8 @@ Route::post('file/image', 'App\Http\Controllers\Api\FileController@updateImage')
 
 // Login
 Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
-
+//Register
+Route::post('register',[RegisterController::class,'register']);
 
 
 /*---All Product---*/
